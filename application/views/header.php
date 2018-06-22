@@ -444,11 +444,13 @@
                     <?php }
                     ?>
 
-                      <li <?php if($contrnew == 'services/'){?>class="active"<?php } ?>>
+                        <li <?php if($contrnew == 'services/'){?>class="active"<?php } ?>>
+                            <a href="<?php echo base_url()?>admin/services/subscribed"><i class="fa fa-gear"></i> خدمات اشتركت بها</a>
+                        </li>   
 
-                        <a href="<?php echo base_url()?>admin/services/index"><i class="fa fa-gear"></i>قائمة الخدمات</a>
-
-                      </li>                       
+                        <li <?php if($contrnew == 'services/'){?>class="active"<?php } ?>>
+                            <a href="<?php echo base_url()?>admin/services/unsubscribed"><i class="fa fa-gear"></i>خدمات لم تشترك بها </a>
+                        </li>                    
 
                     </ul>
 
