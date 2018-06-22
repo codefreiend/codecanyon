@@ -138,7 +138,7 @@ class Training_courses extends CI_Controller
 
 	}
 
-	function center_courses($id=1)
+	function centerCourses($id=1)
 
 	{
 		$data['ion_auth'] = $this->ion_auth;
