@@ -275,7 +275,7 @@
            </a>
 
            
-           <a href="<?php echo base_url()?>admin/centers/centerCourses/" title="centerCourse">
+           <a href="<?php echo base_url()?>admin/Training_courses/centerCourses" title="centerCourse">
             <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
            </a>
 
