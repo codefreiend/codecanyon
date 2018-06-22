@@ -189,7 +189,7 @@ class Services extends CI_Controller
 
 
 
-        $data["results"] = $result = $this->services->getList("services",$pagi);
+        $data["results"] = $result = $this->services->getList("services",$pagi,$this->ion_auth->get_user_id());
 
         $str_links = $this->pagination->create_links();
 
@@ -209,7 +209,7 @@ class Services extends CI_Controller
 
 		else {
 
-			$data['services']  = $this->services->getList('services');
+			$data['services']  = $this->services->getList('services',null,$this->ion_auth->get_user_id());
 			$this->load->library('Gethashedpass');
 		//	$this->gethashedpass obj1 = new $this->gethashedpass;gethashedpass
 			$data['serviceslib'] = $this->gethashedpass;
@@ -384,7 +384,7 @@ class Services extends CI_Controller
 
 
 
-        $data["results"] = $result = $this->services->getList("services",$pagi, $this->ion_auth->get_user_id());
+        $data["results"] = $result = $this->services->getListSubscribed("services",$pagi, $this->ion_auth->get_user_id());
 
         $str_links = $this->pagination->create_links();
 
@@ -404,7 +404,7 @@ class Services extends CI_Controller
 
 		else {
 
-			$data['services']  = $this->services->getList('services', array(), $this->ion_auth->get_user_id());
+			$data['services']  = $this->services->getListSubscribed('services', array(), $this->ion_auth->get_user_id());
 			$this->load->library('Gethashedpass');
 		//	$this->gethashedpass obj1 = new $this->gethashedpass;gethashedpass
 			$data['serviceslib'] = $this->gethashedpass;
@@ -515,40 +515,20 @@ class Services extends CI_Controller
 
        $data['errors'] = array();
 
-       if($this->form_validation->run() == FALSE) 
+       if($this->form_validation->run() == FALSE)  {
 
-       {
-
-      	$data["currency"]=$this->services->getListTable("currency");
-
-      	
-
-      	
-
+      	$data["currency"]=$this->services->getListTable("currency");   
         $data['services']=$this->services->getRow('services',$id);
-
         $this->load->view('admin/services/view', $data);
-
        }
-
-       else
-
-       {
-
+       else  {
 		redirect('admin/services/view');
-
        }
-
     }
 
-    else
-
-    {
-
+    else   {
        $this->session->set_flashdata('message', ' Invalid Id !'); 
-
        redirect('admin/services/view');
-
 	}
 
   }

@@ -21,6 +21,7 @@ class Service_subscriptions extends CI_Controller
 		$this->load->library('form_validation');
 
 		$this->load->model('admin/service_subscriptions_model','service_subscriptions');
+		$this->load->model('admin/services_model','services');
 
 	}
 
@@ -276,22 +277,37 @@ class Service_subscriptions extends CI_Controller
 	}
 
 	function subscribe($user_id,$service_id){
+
+		$this->form_validation->set_rules('num_of_years', 'عدد سنوات الاشتراك', 'required');
+
+
 			if (!$this->ion_auth->logged_in()) {
 			redirect('/auth/login/');
 		}
-		$data['ion_auth'] = $this->ion_auth;
 
-		$data['service_id'] = $service_id;
-		
-		$query = $this->db->get_where("services", array("id"=>$service_id));
-		if($query->num_rows()==1){
-			$data['service_record'] = $query->row();
-			$this->load->view('admin/service_subscriptions/subscribe', $data);
-			
-		}else{
 
-			$this->session->set_flashdata('message', 'You already subsribed to this service!');
+        if($this->form_validation->run() == FALSE) 
+		{		
+			$data['ion_auth'] = $this->ion_auth;
+			$data['service_id'] = $service_id;
 			
+			$query = $this->db->get_where("services", array("id"=>$service_id));
+			if($query->num_rows()==1){
+				$data['service_record'] = $query->row();
+				$data['service']=$this->services->getRow('services',$service_id);
+				$data["currency"]=$this->services->getListTable("currency");  			
+				$this->load->view('admin/service_subscriptions/subscribe', $data);			
+			}else{
+				$this->session->set_flashdata('message', 'تم الاشتراك مسبقا في هذه الخدمة!');			
+			}
+
+		}else {
+			$saveData['service_id'] = set_value('service_id');
+			$saveData['user_id'] = set_value('user_id');
+			$saveData['user_id'] = set_value('user_id');
+			$insert_id = $this->service_subscriptions->insert('service_subscriptions',$saveData);
+			$this->session->set_flashdata('message', 'Service_subscriptions Added Successfully!');
+			redirect('admin/service_subscriptions');
 		}
 
 

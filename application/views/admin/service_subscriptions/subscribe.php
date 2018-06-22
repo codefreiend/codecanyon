@@ -12,13 +12,13 @@
 
       <li>
 
-        <a href="<?php echo base_url().'admin/'?>">Dashboard</a>
+        <a href="<?php echo base_url().'admin/'?>">الداشبورد</a>
 
       </li>
 
       <li class="active">
 
-        <strong>Service_subscriptions</strong>
+        <strong>الاشتراك في خدمة جديدة</strong>
 
       </li>
 
@@ -46,7 +46,7 @@
 
       <div class="ibox-title" >
 
-        <h5>Add <small></small></h5>
+        <h5 class="pull-left">الاشتراك في خدمة <small></small></h5>
 
         <div class="ibox-tools">                           
 
@@ -134,7 +134,18 @@
 
           <div class="col-md-4">
 
-          <p><?=$service_record->price?></p>
+          <p><?=$service_record->price?>
+          
+            <?php 
+
+	      if(isset($currency) && !empty($currency)):
+          foreach($currency as $key => $value): 
+            if($value->id==$service->currency)
+                  echo $value->currency_desc;  
+          endforeach; 
+	       endif; ?>
+          
+          </p>
 
         </div>
 

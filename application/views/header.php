@@ -449,7 +449,7 @@
                         </li>   
 
                         <li <?php if($contrnew == 'services/'){?>class="active"<?php } ?>>
-                            <a href="<?php echo base_url()?>admin/services/unsubscribed"><i class="fa fa-gear"></i>خدمات لم تشترك بها </a>
+                            <a href="<?php echo base_url()?>admin/services/index/1"><i class="fa fa-gear"></i>خدمات لم تشترك بها </a>
                         </li>                    
 
                     </ul>
