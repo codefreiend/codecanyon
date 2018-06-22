@@ -148,6 +148,23 @@ class Userz_model extends CI_Model
 
     }
 
+    function getCountOfStudentsEnvolved($table, $key='', $value='') {
+
+            $this->db->select("$table.*");
+            if(isset($key) && isset($value) && !empty($key) && !empty($value))
+            {
+                $this->db->where($key,$value);
+            }
+            $this->db->from($table);
+             $this->db->join("gender", "userz.gender = gender.id", "left");
+             $this->db->join("countries", "userz.country = countries.id", "left");
+             $this->db->join("cities", "userz.city = cities.id", "left"); 
+            $this->db->join("student_courses", "userz.id = student_courses.student_id");     
+             
+            $query = $this->db->get();
+            return $query->num_rows();
+    }
+
 
 
     function getListTable($table) {
@@ -218,23 +235,16 @@ class Userz_model extends CI_Model
     function getCount($table, $key='', $value='') {
 
             $this->db->select("$table.*");
-
             if(isset($key) && isset($value) && !empty($key) && !empty($value))
-
             {
-
                 $this->db->where($key,$value);
-
             }
-
             $this->db->from($table);
-
-             $this->db->join("gender", "userz.gender = gender.id", "left");  $this->db->join("countries", "userz.country = countries.id", "left");  $this->db->join("cities", "userz.city = cities.id", "left"); 
-
+             $this->db->join("gender", "userz.gender = gender.id", "left");
+             $this->db->join("countries", "userz.country = countries.id", "left");
+             $this->db->join("cities", "userz.city = cities.id", "left"); 
             $query = $this->db->get();
-
             return $query->num_rows();
-
     }
 
 

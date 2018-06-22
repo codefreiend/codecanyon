@@ -120,9 +120,16 @@ class Userz extends CI_Controller
 
 		$config['suffix']='?'.$_SERVER['QUERY_STRING'];
 
-        $config["base_url"] = base_url() . "admin/userz/index";
-
+		$config["base_url"] = base_url() . "admin/userz/index";
+		if(isset($envoled) && isset($course_id)){
+        $total_row = $this->userz->getCountOfStudentsEnvolved('userz', $searchBy, $searchValue);
+			
+		}
+		else{
         $total_row = $this->userz->getCount('userz', $searchBy, $searchValue);
+			
+		}
+
 
         $config["first_url"] = base_url()."admin/userz/index".'?'.$_SERVER['QUERY_STRING'];
 
@@ -221,9 +228,7 @@ class Userz extends CI_Controller
 			}else{
 				$data["userz"] = $result = $this->userz->getStudentsEnvolved("userz",$pagi,$id);			
 		    	$this->load->view('admin/userz/manage',$data);				
-			}
-
-			
+			}			
 
 		}
 
