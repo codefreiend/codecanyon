@@ -243,23 +243,14 @@
 
                 <th class="action-width">
 
-		   <a href="<?php echo base_url()?>admin/userz/view/<?php echo $value->id; ?>" title="View">
+		   <a href="<?php echo base_url()?>admin/userz/view/<?php echo $value->id; ?>/student" title="View">
 
             <span class="btn btn-info " ><i class="fa fa-eye"></i></span>
 
            </a>
 
-           <a href="<?php echo base_url()?>admin/userz/edit/<?php echo $value->id; ?>" title="Edit">
+           
 
-            <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
-
-           </a>
-
-           <a  title="Delete" data-toggle="modal" data-target="#commonDelete" onclick="set_common_delete('<?php echo $value->id; ?>','userz');">
-
-           <span class="btn btn-info " ><i class="fa fa-trash-o "></i></span>
-
-           </a>
 
             </th>
 
