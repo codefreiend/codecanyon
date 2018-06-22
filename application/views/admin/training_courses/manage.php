@@ -221,7 +221,7 @@
 
                 <th><?php if(!empty($value->course_specilization)){ echo $value->course_specilization; }?></th>
 
-                <th><?php if(!empty($value->about_course)){ echo $value->about_course; }?></th>
+                <th><?php if(!empty($value->about_course)){ echo word_limiter($value->about_course, 3); }?></th>
 
                 <th><?php if(!empty($value->tcenter)){ echo $value->tcenter; }?></th>
 

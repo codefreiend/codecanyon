@@ -17,6 +17,7 @@ class Training_courses extends CI_Controller
 		$this->load->helper('url');
 
 		$this->load->library('ion_auth');
+		$this->load->helper('text');
 
 		$this->load->library('form_validation');
 

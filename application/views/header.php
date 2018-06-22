@@ -418,7 +418,7 @@
 
                 <!-- BO : Services -->
                 
-            <?php if($ion_auth->in_group('admin')||$ion_auth->in_group('Instructor') ){?>
+            <?php if($ion_auth->in_group('admin')||$ion_auth->in_group('Instructor') || $ion_auth->in_group('center')){?>
 
                 <li <?php if($contr == 'services'){?>class="active "<?php } ?>  >
 
