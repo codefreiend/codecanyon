@@ -1,0 +1,444 @@
+/* (1366x768) WXGA Display */
+
+@media screen and (min-width: 1366px) and (max-width: 1919px) {}
+
+
+/* Normal desktop :992px. */
+
+@media (min-width: 992px) and (max-width: 1197px) {
+    .slider-items h2 {
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
+    .team-content h3 {
+        font-size: 15px;
+    }
+    .project-area2 .project-wrap {
+        width: 33.33%;
+    }
+    .contact-wrap ul li {
+        padding: 40px 10px 40px 95px;
+    }
+    .team-content h3 span {
+        font-size: 14px;
+    }
+}
+
+
+/* Normal desktop :991px. */
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.slider-items {
+        text-align:center;
+    }
+	.nivo-directionNav a {
+		left: 10px;
+	}
+	.nivo-directionNav a.nivo-nextNav {
+		right: 10px;
+	}
+    .mainmenu ul li {
+        margin-left: 15px;
+    }
+    .slider-items h2 {
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
+    .service-items {
+        margin-top: 0;
+    }
+    .service-area {
+        padding: 100px 0px;
+    }
+    .ptb-120 {
+        padding: 100px 0px;
+    }
+    .pt-120 {
+        padding-top: 100px;
+    }
+    .pb-120 {
+        padding-bottom: 120px;
+    }
+    .callto-action-wrap {
+        padding: 90px 0 100px;
+    }
+	.team-wrap {
+		height: 515px;
+	}
+    .team-area2 .team-wrap {
+        height: 489px;
+    }
+    .test-wrap {
+        padding: 40px 30px;
+    }
+    .test-info {
+        float: none;
+        width: auto;
+        margin-bottom: 20px;
+    }
+    .project-area,
+    .team-area,
+    .pricing-area {
+        padding: 100px 0px 70px;
+    }
+    .footer-widget {
+        margin-bottom: 30px;
+        height: 245px;
+    }
+    .header-area2 .mainmenu ul li {
+        margin-left: 14px;
+    }
+    .header-area2 .mainmenu ul li:first-child {
+        margin-left: 0px;
+    }
+    .slider-area2 .slider-items {
+        height: 550px;
+    }
+    .news-wrap {
+        height: 530px;
+    }
+    .about-content {
+        padding: 40px 15px;
+    }
+    .about-content h3 {
+        font-size: 20px;
+    }
+    .about-page-area {
+        padding-bottom: 70px;
+    }
+    .service-area2 {
+        padding: 100px 0px 70px;
+    }
+    .project-area2 .project-wrap {
+        width: 50%;
+    }
+    aside.left-sidebar {
+        margin-top: 50px;
+    }
+    .revarce-section {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+    }
+    .contact-form {
+        margin-bottom: 50px;
+    }
+    .contact-wrap {
+        margin-bottom: 70px;
+    }
+    .error-area {
+        padding: 100px 0px;
+    }
+    .footer-area {
+        height: auto;
+        position: static;
+    }
+    .mb-510 {
+        margin-bottom: 0px;
+    }
+    .about-area.about-area2 {
+        padding: 100px 0;
+    }
+}
+
+
+/* small mobile :320px. */
+
+@media (max-width: 767px) {
+    .container {
+        width: 100%
+    }
+    .slider-items {
+        height: 500px;
+    }
+    .responsive-menu-wrap .slicknav_nav {
+        width: 290px;
+    }
+    .service-area {
+        padding: 100px 0px;
+    }
+    .ptb-120 {
+        padding: 100px 0px;
+    }
+    .pt-120 {
+        padding-top: 100px;
+    }
+    .pb-120 {
+        padding-bottom: 100px;
+    }
+    .callto-action-wrap {
+        padding: 90px 0 100px;
+    }
+    .test-wrap {
+        padding: 40px 30px;
+    }
+    .test-info {
+        float: none;
+        width: auto;
+        margin-bottom: 20px;
+    }
+    .project-area,
+    .team-area,
+    .pricing-area {
+        padding: 100px 0px 70px;
+    }
+    .slider-items {
+        display: none;
+    }
+    .nivo-directionNav a {
+        height: 35px;
+        left: 10px;
+        line-height: 35px;
+        width: 35px;
+    }
+    .nivo-directionNav a.nivo-nextNav {
+        right: 10px;
+    }
+	.header-top-right.text-right {
+		text-align: center;
+		margin-top: 15px;
+		margin-bottom: 5px;
+	}
+    .section-title p {
+        font-size: 15px;
+        line-height: 26px;
+    }
+    .service-items {
+        margin-top: 0;
+    }
+    .service-img {
+        padding: 40px 0;
+    }
+    .about-item {
+        margin-bottom: 30px;
+    }
+    .about-area {
+        padding: 100px 0px 70px;
+    }
+    .project-menu button {
+        padding: 10px 25px;
+        margin-bottom: 5px;
+    }
+    .team-content h3 {
+        font-size: 15px;
+    }
+    .team-content h3 span {
+        font-size: 14px;
+    }
+    .header-top-left {
+        text-align: center;
+    }
+    .slider-area2 .slider-items {
+        display: block;
+    }
+    .header-area2 .header-bottom-area {
+        position: static;
+        background: #FF9C10;
+    }
+    .header-bottom {
+        padding: 0;
+    }
+	.header-area2 .slicknav_menu .slicknav_icon {
+		margin: 2px -5px;
+	}
+    .slider-items h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .slider-items p {
+        font-size: 15px;
+    }
+    .slider-items ul li a {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    .slider-content {
+        padding-top: 0;
+    }
+    .fanface-wrap h2 {
+        font-size: 30px;
+    }
+    .fanface-wrap h3 {
+        font-size: 15px;
+    }
+    .testmonial-area2 .test-content p {
+        font-size: 15px;
+    }
+    .about-content {
+        padding: 40px 15px;
+    }
+    .about-content h3 {
+        font-size: 18px;
+    }
+    .about-page-area {
+        padding-bottom: 70px;
+    }
+    .about-content p {
+        font-size: 14px;
+    }
+    .breadcumb-wrap {
+        text-align: center;
+    }
+    .service-area2 .service-wrap {
+        padding: 30px 15px;
+    }
+    .service-area2 {
+        padding: 100px 0px 70px;
+    }
+    .project-area2 .project-wrap {
+        width: 100%;
+    }
+    .header-bottom-area.sticky {
+        position: static;
+    }
+	aside.left-sidebar {
+		margin-top: 50px;
+		margin-bottom: 30px;
+	}
+    .revarce-section {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap-reverse;
+        flex-wrap: wrap-reverse;
+    }
+    .news-tags ul li:first-child {
+        margin-right: 3px;
+    }
+    .comment-theme {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+    .comment-wrap1 {
+        margin-left: 20px;
+        margin-bottom: 0px;
+    }
+    .contact-form {
+        margin-bottom: 50px;
+    }
+    .contact-wrap {
+        margin-bottom: 70px;
+    }
+    .contact-wrap ul li {
+        padding: 40px 10px 40px 90px;
+    }
+    .error-area {
+        padding: 100px 0px;
+    }
+    .footer-area {
+        height: auto;
+        position: static;
+    }
+    .mb-510 {
+        margin-bottom: 0px;
+    }
+    .about-area.about-area2 {
+        padding: 100px 0;
+    }
+    .about-area2 .about-wrap ul li {
+        font-size: 15px;
+    }
+	.brand-area {
+		padding:50px 0px;
+	}
+	.service-area3 .service-wrap {
+		padding: 0px;
+	}
+	.service-area3 .service-img{
+		padding:0px;
+	}
+	.breadcumb-wrap h2 {
+		font-size: 26px;
+	}
+	.news-area {
+		padding: 100px 0px 70px;
+	}
+	.news-details-wrap h3 {
+		font-size: 24px;
+	}
+	.news-details-area {
+		padding: 100px 0px 70px;
+	}
+	.news-sidebar {
+		padding: 30px 10px;
+	}
+	.widget_tag_cloud ul li a {
+		padding: 6px 6px;
+	}
+	.header-bottom-area.sticky-menu{
+		position:static;
+	}
+}
+
+
+/* Large Mobile :480px. */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    .container {
+        width: 450px;
+    }
+    .responsive-menu-wrap .slicknav_nav {
+        width: 420px;
+    }
+}
+
+
+
+/* small mobile :320px. */
+
+@media (min-width: 600px) and (max-width: 767px) {
+    .container {
+        width: 580px
+    }
+    .col-2 {
+        float: left;
+        width: 50%;
+    }
+    .team-wrap {
+        height: 515px;
+    }
+    .hidden-xl {
+        display: none;
+    }
+    .team-content h3 span {
+        font-weight: 600;
+        font-size: 12px;
+    }
+    .responsive-menu-wrap .slicknav_nav {
+        width: 550px;
+    }
+    .team-content h3 {
+        font-size: 14px;
+    }
+    .header-top-right.text-right {
+        text-align: right;
+        margin-top: 0;
+    }
+    .header-top-left {
+        text-align: left;
+    }
+    .header-top-left ul li {
+        margin: 2px 5px 2px 0px;
+    }
+    .header-top-left ul li i {
+        margin-right: 2px;
+    }
+    .slider-items h2 {
+        font-size: 30px;
+    }
+    .slider-items p {
+        font-size: 17px;
+    }
+    .service-area2 .service-wrap {
+        padding: 30px 15px;
+    }
+    .breadcumb-wrap h2 {
+        text-align: left;
+    }
+    .breadcumb-wrap ul {
+        text-align: right;
+    }
+}
