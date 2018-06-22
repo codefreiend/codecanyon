@@ -104,6 +104,7 @@
 
           <p><?=$service_record->service_name?></p>
 
+
         </div>
 
     </div>
@@ -152,20 +153,15 @@
     </div>
 
       <!-- service price End -->
+          <input type="hidden" name="service_id" value="<?php echo set_value("service_id",html_entity_decode($service_record->id)); ?>">
 
 	<!-- service price Start -->
 
 	<div class="form-group">
-
         <label class="control-label col-md-3"> عدد سنوات الاشتراك  </label>
-
           <div class="col-md-4">
-
-	    <input type="number" class="form-control" id="num_of_years" name="num_of_years" value="1" />
-        
-
+	          <input type="number" class="form-control" id="num_of_years" name="num_of_years" value="1" />
         </div>
-
     </div>
 
       <!-- service price End -->

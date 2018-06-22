@@ -277,10 +277,7 @@ class Service_subscriptions extends CI_Controller
 	}
 
 	function subscribe($user_id,$service_id){
-
 		$this->form_validation->set_rules('num_of_years', 'عدد سنوات الاشتراك', 'required');
-
-
 			if (!$this->ion_auth->logged_in()) {
 			redirect('/auth/login/');
 		}
@@ -303,14 +300,13 @@ class Service_subscriptions extends CI_Controller
 
 		}else {
 			$saveData['service_id'] = set_value('service_id');
-			$saveData['user_id'] = set_value('user_id');
-			$saveData['user_id'] = set_value('user_id');
+			$saveData['user_id'] = $this->ion_auth->get_user_id();
+			$saveData['num_of_years'] = set_value('num_of_years');
+			$saveData['sub_date'] = date('Y-d-m');
 			$insert_id = $this->service_subscriptions->insert('service_subscriptions',$saveData);
-			$this->session->set_flashdata('message', 'Service_subscriptions Added Successfully!');
-			redirect('admin/service_subscriptions');
+			$this->session->set_flashdata('message', 'تم الاشتراك في الخدمة');
+			redirect('admin/services/subscribed');
 		}
-
-
 	}
 
 	function view($id)

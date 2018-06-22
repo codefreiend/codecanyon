@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost:80/dawratbook/';
+$config['base_url'] = 'http://localhost:81/dawratbook/';
 //$config['base_url'] = 'http://dawratbook.com/';
 
 //try to catch the base url in case of undefined base url 

@@ -110,7 +110,7 @@
                                             $(".date").datepicker({
                                                 changeMonth: true,
                                                 changeYear: true,
-                                                dateFormat: 'dd-mm-yy'
+                                                dateFormat: 'yy-mm-dd'
                                             
                                             });
 
