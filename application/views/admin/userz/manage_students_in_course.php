@@ -243,7 +243,7 @@
 
                 <th class="action-width">
 
-		   <a href="<?php echo base_url()?>admin/userz/view/<?php echo $value->id; ?>/student" title="View">
+		   <a href="<?php echo base_url()?>admin/userz/view_student/<?php echo $value->id; ?>" title="View">
 
             <span class="btn btn-info " ><i class="fa fa-eye"></i></span>
 

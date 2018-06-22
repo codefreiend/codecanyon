@@ -338,14 +338,14 @@ class Userz extends CI_Controller
 
 	{
 
-	  if (!$this->ion_auth->logged_in()) {
-	  	redirect('/auth/login/');
-	  }
+		if (!$this->ion_auth->logged_in()) {
+			redirect('/auth/login/');
+		}
 
-	  if(isset($id) and !empty($id))
-	  {
-	     $data = NULL;
-		 $data['ion_auth'] = $this->ion_auth;
+		if(isset($id) and !empty($id))
+		{
+			$data = NULL;
+			$data['ion_auth'] = $this->ion_auth;
 
 			$this->form_validation->set_rules('username', 'Username Name', 'greater_than[8]');
 			$this->form_validation->set_rules('password', 'Password Name', 'greater_than[8]');
@@ -369,34 +369,95 @@ class Userz extends CI_Controller
 			$this->form_validation->set_rules('address', 'Address Name', 'trim');
 
 
-       $data['errors'] = array();
+			$data['errors'] = array();
 
-       if($this->form_validation->run() == FALSE) 
-       {
-			  $data["gender"]=$this->userz->getListTable("gender");
-			  $data["countries"]=$this->userz->getListTable("countries");
-			  $data["cities"]=$this->userz->getListTable("cities");
-        	  $data['userz']=$this->userz->getRow('userz',$id);
-        	$this->load->view('admin/userz/view', $data);
+			if($this->form_validation->run() == FALSE) 
+			{
+					$data["gender"]=$this->userz->getListTable("gender");
+					$data["countries"]=$this->userz->getListTable("countries");
+					$data["cities"]=$this->userz->getListTable("cities");
+					$data['userz']=$this->userz->getRow('userz',$id);
+					$this->load->view('admin/userz/view', $data);
 
-       }
-       else
-       {
-			redirect('admin/userz/view');
-       }
+			}
+			else
+			{
+					redirect('admin/userz/view');
+			}
 
-    }
+		}
 
-    else
+		else
 
-    {
-		 $data['ion_auth'] = $this->ion_auth;
+		{
+			$data['ion_auth'] = $this->ion_auth;
+			$this->session->set_flashdata('message', ' Invalid Id !'); 
+			redirect('admin/userz/view', data);
+		}
 
-       $this->session->set_flashdata('message', ' Invalid Id !'); 
+  }
 
-       redirect('admin/userz/view', data);
 
-	}
+  function view_student($id)
+
+	{
+
+		if (!$this->ion_auth->logged_in()) {
+			redirect('/auth/login/');
+		}
+
+		if(isset($id) and !empty($id))
+		{
+			$data = NULL;
+			$data['ion_auth'] = $this->ion_auth;
+
+			$this->form_validation->set_rules('username', 'Username Name', 'greater_than[8]');
+			$this->form_validation->set_rules('password', 'Password Name', 'greater_than[8]');
+			$this->form_validation->set_rules('full_name', 'Full_name Name', 'greater_than[8]');
+			$this->form_validation->set_rules('birth_date', 'Birth_date Name', 'trim');
+			$this->form_validation->set_rules('gender', 'Gender Name', 'trim');
+			$this->form_validation->set_rules('company', 'Company Name', 'trim');
+			$this->form_validation->set_rules('mobile', 'Mobile Name', 'numeric');
+			$this->form_validation->set_rules('phone', 'Phone Name', 'numeric');
+			$this->form_validation->set_rules("photo", "Photo", "trim|xss_clean");
+
+         	$this->userz->uploadData($photo_data, "photo", "photo_path","","gif|jpg|png|jpeg");
+
+			if(isset($photo_data["photo_err"]) and !empty($photo_data["photo_err"]))
+			{
+				$data["errors"]=$photo_data["photo_err"];
+				$this->form_validation->set_rules("photo","Photo","trim");
+			}
+			$this->form_validation->set_rules('country', 'Country Name', 'trim');
+			$this->form_validation->set_rules('city', 'City Name', 'trim');
+			$this->form_validation->set_rules('address', 'Address Name', 'trim');
+
+
+			$data['errors'] = array();
+
+			if($this->form_validation->run() == FALSE) 
+			{
+					$data["gender"]=$this->userz->getListTable("gender");
+					$data["countries"]=$this->userz->getListTable("countries");
+					$data["cities"]=$this->userz->getListTable("cities");
+					$data['userz']=$this->userz->getRow('userz',$id);
+					$this->load->view('admin/userz/view_student', $data);
+
+			}
+			else
+			{
+					redirect('admin/userz/view_student');
+			}
+
+		}
+
+		else
+
+		{
+			$data['ion_auth'] = $this->ion_auth;
+			$this->session->set_flashdata('message', 'هذاالطالب غير موجود'); 
+			redirect('admin/userz/view_student', data);
+		}
 
   }
 

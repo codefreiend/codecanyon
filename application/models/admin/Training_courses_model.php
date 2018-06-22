@@ -22,70 +22,76 @@ class Training_courses_model extends CI_Model
 
 	function getList($table, $pagination=array(), $user_id = null) {
 
-
-
         //  PAGINATION START
-
-        if((isset($pagination['cur_page'])) and !empty($pagination['per_page']))
-
-        {
-
+        if((isset($pagination['cur_page'])) and !empty($pagination['per_page'])) {
           $this->db->limit($pagination['per_page'],$pagination['cur_page']);
-
         }
 
         //  PAGINATION END
-
-
-
         // sort
-
           $order_by = isset($_GET['sortBy']) && in_array($_GET['sortBy'], $this->v_fields)?$_GET['sortBy']:'';
-
           $order = isset($_GET['order']) && $_GET['order']=='asc'?'asc':'desc';
-
           if($order_by!=''){
-
             $this->db->order_by($order_by, $order);
-
           }
-
-
-
         // end sort
 
-
-
         // SEARCH START
-
         if (!empty($_GET['searchValue']) && $_GET['searchValue']!="" && !empty($_GET['searchBy']) && $_GET['searchBy']!="" && in_array($_GET['searchBy'],$this->v_fields) ) {
-
             $this->db->like($_GET['searchBy'],$_GET['searchValue']);
-
         }
 
-        // SEARCH END
-
-
-       
-        
-
+        // SEARCH END  
         $this->db->select("$table.*  , specialization.main_specialization as course_specilization  , centers.center_name as tcenter  , userz.full_name as instructor  , currency.currency_desc as currency ");
-
         $this->db->from($table);
-
          $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left");     
-
           if((isset($user_id)) and !empty($user_id)){
             $this->db->where('instructor', $user_id);
         }
 
         $this->db->order_by("id","desc");
-
         $query = $this->db->get();
-
         return $result = $query->result();
+    }
 
+
+    function getListOfCenterCourses($table, $pagination=array(), $user_id = null) {
+
+        //  PAGINATION START
+        if((isset($pagination['cur_page'])) and !empty($pagination['per_page'])) {
+          $this->db->limit($pagination['per_page'],$pagination['cur_page']);
+        }
+
+        //  PAGINATION END
+        // sort
+          $order_by = isset($_GET['sortBy']) && in_array($_GET['sortBy'], $this->v_fields)?$_GET['sortBy']:'';
+          $order = isset($_GET['order']) && $_GET['order']=='asc'?'asc':'desc';
+          if($order_by!=''){
+            $this->db->order_by($order_by, $order);
+          }
+        // end sort
+
+        // SEARCH START
+        if (!empty($_GET['searchValue']) && $_GET['searchValue']!="" && !empty($_GET['searchBy']) && $_GET['searchBy']!="" && in_array($_GET['searchBy'],$this->v_fields) ) {
+            $this->db->like($_GET['searchBy'],$_GET['searchValue']);
+        }
+
+        $center_id = 0;
+        //get the center of the owner
+        $center_query = $this->db->get_where("centers", array("owner"=>$user_id));
+        if($center_query->num_rows() == 1){
+            $center_id = $center_query->row()->id;
+        }
+        // SEARCH END  
+        $this->db->select("$table.*  , specialization.main_specialization as course_specilization  , centers.center_name as tcenter  , userz.full_name as instructor  , currency.currency_desc as currency ");
+        $this->db->from($table);
+        $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left");     
+          
+        $this->db->where('tcenter', $center_id);        
+
+        $this->db->order_by("id","desc");
+        $query = $this->db->get();
+        return $result = $query->result();
     }
 
 
@@ -222,23 +228,26 @@ class Training_courses_model extends CI_Model
     function getCount($table, $key='', $value='') {
 
             $this->db->select("$table.*");
-
-            if(isset($key) && isset($value) && !empty($key) && !empty($value))
-
-            {
-
+            if(isset($key) && isset($value) && !empty($key) && !empty($value))  {
                 $this->db->where($key,$value);
-
             }
-
             $this->db->from($table);
-
              $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left"); 
-
             $query = $this->db->get();
-
             return $query->num_rows();
+    }
 
+
+       function getCountCenterCourses($table, $key='', $value='') {
+
+            $this->db->select("$table.*");
+            if(isset($key) && isset($value) && !empty($key) && !empty($value))  {
+                $this->db->where($key,$value);
+            }
+            $this->db->from($table);
+             $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left"); 
+            $query = $this->db->get();
+            return $query->num_rows();
     }
 
 

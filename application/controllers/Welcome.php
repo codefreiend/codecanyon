@@ -468,6 +468,10 @@ class Welcome extends CI_Controller {
             $search = array("instructor" => $this->input->get('instructor'));
          }
 
+           if(isset($_GET['start_date']) && !empty($_GET['start_date'])){
+            $search = array("start_date" => $this->input->get('start_date'));
+         }
+
        // print_r($search);
         $data['center_blocks'] = $this->show_center_blocks(); 
         $data['instructors_data'] = $this->instructors();

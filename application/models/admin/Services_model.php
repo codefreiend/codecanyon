@@ -20,64 +20,35 @@ class Services_model extends CI_Model
 
 
 
-	function getList($table, $pagination=array()) {
-
-
-
+	function getList($table, $pagination=array(), $user_id) {
         //  PAGINATION START
-
-        if((isset($pagination['cur_page'])) and !empty($pagination['per_page']))
-
-        {
-
+        if((isset($pagination['cur_page'])) and !empty($pagination['per_page'])){
           $this->db->limit($pagination['per_page'],$pagination['cur_page']);
-
         }
-
         //  PAGINATION END
 
-
-
         // sort
-
           $order_by = isset($_GET['sortBy']) && in_array($_GET['sortBy'], $this->v_fields)?$_GET['sortBy']:'';
-
           $order = isset($_GET['order']) && $_GET['order']=='asc'?'asc':'desc';
-
           if($order_by!=''){
-
             $this->db->order_by($order_by, $order);
-
           }
-
-
-
         // end sort
-
-
-
         // SEARCH START
-
         if (!empty($_GET['searchValue']) && $_GET['searchValue']!="" && !empty($_GET['searchBy']) && $_GET['searchBy']!="" && in_array($_GET['searchBy'],$this->v_fields) ) {
-
             $this->db->like($_GET['searchBy'],$_GET['searchValue']);
 
         }
-
         // SEARCH END
 
-
-
         $this->db->select("$table.*  , currency.currency_desc as currency ");
-
         $this->db->from($table);
-
-         $this->db->join("currency", "services.currency = currency.id", "left");     
+        $this->db->join("currency", "services.currency = currency.id", "left");     
+        $this->db->join("service_subscriptions","services.id = service_subscriptions.service_id");
+        $this->db->where("service_subscriptions.user_id",$user_id);
 
         $this->db->order_by("id","desc");
-
         $query = $this->db->get();
-
         return $result = $query->result();
 
     }
@@ -137,25 +108,32 @@ class Services_model extends CI_Model
 
 
     function getCount($table, $key='', $value='') {
-
             $this->db->select("$table.*");
-
             if(isset($key) && isset($value) && !empty($key) && !empty($value))
-
             {
-
                 $this->db->where($key,$value);
-
             }
 
             $this->db->from($table);
-
              $this->db->join("currency", "services.currency = currency.id", "left"); 
-
             $query = $this->db->get();
-
             return $query->num_rows();
+    }
 
+    
+    function getCountSubscribed($table, $key='', $value='', $user_id) {
+            $this->db->select("$table.*");
+            if(isset($key) && isset($value) && !empty($key) && !empty($value))
+            {
+                $this->db->where($key,$value);
+            }
+
+            $this->db->from($table);
+            $this->db->join("currency", "services.currency = currency.id", "left"); 
+            $this->db->join("service_subscriptions","services.id = service_subscriptions.service_id");
+            $this->db->where("service_subscriptions.user_id",$user_id);
+            $query = $this->db->get();
+            return $query->num_rows();
     }
 
 

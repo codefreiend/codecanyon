@@ -84,7 +84,7 @@ h5 {
 
 .nav > li.active > a {
 
-    color: #000000;
+    color: #5cb85c;
 
 }
 
@@ -92,7 +92,7 @@ h5 {
 
 .navbar-default .nav > li > a:focus {
 
-    background-color: #000000;
+    background-color: #5cb85c;
 
     color: white;
 
@@ -4489,7 +4489,7 @@ div.dt-button-info {
 .dd-item > button[data-action="collapse"]:before {
 
     content: '-';
-    overflow: 
+    overflow: hidden;
 }
 
 #nestable2 .dd-item > button {
