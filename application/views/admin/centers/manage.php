@@ -12,7 +12,7 @@
 
          <li>
 
-            <a href="<?php echo base_url().'admin/'?>">الداش بورد</a>
+            <a href="<?php echo base_url().'index.php/welcome/login'?>">الداش بورد</a>
 
          </li>
 
@@ -275,8 +275,8 @@
            </a>
 
            
-           <a href="<?php echo base_url()?>admin/Training_courses/centerCourses" title="centerCourse">
-            <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
+           <a href="<?php echo base_url()?>admin/Training_courses/centerCourses" title="الكورسات">
+            <span class="btn btn-info " ><i class="fa fa-graduation-cap"></i></span>
            </a>
 
            <a  title="Delete" data-toggle="modal" data-target="#commonDelete" onclick="set_common_delete('<?php echo $value->id; ?>','centers');">

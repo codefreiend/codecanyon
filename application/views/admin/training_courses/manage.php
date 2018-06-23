@@ -12,7 +12,7 @@
 
          <li>
 
-            <a href="<?php echo base_url().'admin/'?>">الداش يورد</a>
+            <a href="<?php echo base_url().'index.php/welcome/login'?>">الداش يورد</a>
 
          </li>
 
@@ -250,7 +250,7 @@
             <?php if($ion_auth->in_group('admin') || $ion_auth->in_group('Instructor')){?>  
            <a href="<?php echo base_url()?>admin/training_courses/edit/<?php echo $value->id; ?>" title="Edit">
 
-            <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
+              <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
 
            </a>
 

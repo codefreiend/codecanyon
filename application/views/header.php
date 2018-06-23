@@ -42,7 +42,7 @@
                                     <center>
                                         <h2 style="margin: 0px;">
                                             <b>
-        <img src="<?php echo base_url()?>assets/images/logo11.png" class="img-responsive" alt="">
+        <img src="<?php echo base_url()?>assets/images/logo12.png" class="img-responsive" alt="">
         <script>
             function set_common_delete(id, table_name)
             {
@@ -86,7 +86,7 @@
                                 </a>
                             </div>
                             <div class="logo-element">
-                                CI
+                                DB
                             </div>
                         </li>
                 <!-- BO : left nav  -->
@@ -263,7 +263,7 @@
 
                 <li <?php if($contr == 'centers'){?>class="active "<?php } ?>  >
 
-                    <a href="javascript:;"><i class="fa fa-users"></i><span class="title">المراكز التدريبية</span>
+                    <a href="javascript:;"><i class="fa fa-building"></i><span class="title">المراكز التدريبية</span>
 
                         <?php if($contr == 'centers'){?><span class="selected"></span><?php } ?>
 
@@ -296,7 +296,7 @@
 
                   <li <?php if($contr == 'centers'){?>class="active "<?php } ?>  >
 
-                    <a href="javascript:;"><i class="fa fa-users"></i><span class="title">المراكز التدريبية</span>
+                    <a href="javascript:;"><i class="fa fa-building"></i><span class="title">المراكز التدريبية</span>
 
                         <?php if($contr == 'centers'){?><span class="selected"></span><?php } ?>
 
@@ -338,7 +338,7 @@
 
                 <li <?php if($contr == 'training_courses'){?>class="active "<?php } ?>  >
 
-                    <a href="javascript:;"><i class="fa fa-users"></i><span class="title">الدورات التدريبية</span>
+                    <a href="javascript:;"><i class="fa fa-graduation-cap"></i><span class="title">الدورات التدريبية</span>
 
                         <?php if($contr == 'training_courses'){?><span class="selected"></span><?php } ?>
 
@@ -383,7 +383,7 @@
 
                 <li <?php if($contr == 'cities'){?>class="active "<?php } ?>  >
 
-                    <a href="javascript:;"><i class="fa fa-users"></i><span class="title">المدن</span>
+                    <a href="javascript:;"><i class="fa fa-map-marker"></i><span class="title">المدن</span>
 
                         <?php if($contr == 'cities'){?><span class="selected"></span><?php } ?>
 
@@ -422,7 +422,7 @@
 
                 <li <?php if($contr == 'services'){?>class="active "<?php } ?>  >
 
-                    <a href="javascript:;"><i class="fa fa-users"></i><span class="title">الخدمات</span>
+                    <a href="javascript:;"><i class="fa fa-table"></i><span class="title">الخدمات</span>
 
                         <?php if($contr == 'services'){?><span class="selected"></span><?php } ?>
 
@@ -587,38 +587,6 @@
 
 
 
-				<!-- BO : Vistorsdata -->
-             <?php if($ion_auth->in_group('admin1')){?>
-                <li <?php if($contr == 'vistorsdata'){?>class="active "<?php } ?>  >
-
-                    <a href="javascript:;"><i class="fa fa-users"></i><span class="title">Vistorsdata</span>
-
-                        <?php if($contr == 'vistorsdata'){?><span class="selected"></span><?php } ?>
-
-                      <span class="arrow <?php if($contr == 'vistorsdata'){?>open<?php } ?>"></span>
-
-                    </a>
-
-                    <ul class="nav nav-second-level">
-
-                      <li <?php if($contrnew == 'vistorsdata/add'){?>class="active "<?php } ?>>
-
-                        <a href="<?php echo base_url()?>admin/vistorsdata/add"><i class="fa fa-angle-double-right">
-
-                            </i>Add Vistorsdata</a>
-
-                      </li>
-
-                      <li <?php if($contrnew == 'vistorsdata/'){?>class="active"<?php } ?>>
-
-                        <a href="<?php echo base_url()?>admin/vistorsdata/index"><i class="fa fa-gear"></i>Manage Vistorsdata</a>
-
-                      </li>                       
-
-                    </ul>
-
-                </li>
-             <?php } ?>
                 <!--  EO : Vistorsdata -->
 
 
@@ -677,8 +645,20 @@
 
                 
 
-                <li><a href="<?php echo $this->config->item('left_url') ?>password"><i class="fa fa-users"></i><span class="title">تغيير كلمة المرور</span></a></li>
-                <li><a href="<?php echo $this->config->item('left_url') ?>auth/logout"><i class="fa fa-users"></i><span class="title">خروج</span></a></li>
+                <li><a href="<?php echo $this->config->item('left_url') ?>password"><i class="fa fa-lock"></i><span class="title">تغيير كلمة المرور</span></a></li>
+                <li><a href="<?php echo $this->config->item('left_url') ?>password"><i class="fa fa-user"></i><span class="title"> 
+                    
+                نوع الحساب:
+                <?php 
+                    if($ion_auth->in_group('admin')) echo "مدير النظام";
+                    else if($ion_auth->in_group('Instructor')) echo "مدرب";
+                    else if($ion_auth->in_group('Trainee')) echo "متدرب";
+                    else if($ion_auth->in_group('center')) echo "مركز تدريبي";
+                    else if($ion_auth->in_group('CenterOwnerAndInst')) echo "مالك مركز ومدرب";
+                ?>
+            
+            </span></a></li>
+                <li><a href="<?php echo $this->config->item('left_url') ?>auth/logout"><i class="fa fa-arrow-circle-right"></i><span class="title">خروج</span></a></li>
                     </ul>
                 </div>
             </nav>

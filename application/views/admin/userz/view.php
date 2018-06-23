@@ -18,7 +18,7 @@
 
          <li class="active">
 
-            <strong>Userz</strong>
+            <strong>الملف الشخصي</strong>
 
          </li>
 

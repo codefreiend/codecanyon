@@ -6,19 +6,19 @@
 
    <div class="col-lg-10">
 
-      <h2>Userz</h2>
+      <h2>المستخدمين</h2>
 
       <ol class="breadcrumb">
 
          <li>
 
-            <a href="<?php echo base_url().'admin/'?>">Dashboard</a>
+            <a href="<?php echo base_url().'index.php/welcome/login'?>">الداشبورد</a>
 
          </li>
 
          <li class="active">
 
-            <strong>Userz</strong>
+            <strong>المستخدمين</strong>
 
          </li>
 
@@ -54,7 +54,7 @@
 
             <?php endif; ?>
 
-            <a href="<?php echo base_url(); ?>admin/userz/add" class="btn btn-info">ADD NEW</a>
+            <a href="<?php echo base_url(); ?>admin/userz/add" class="btn btn-info">اضافة</a>
 
             <div class="form-group pull-right">
 
@@ -70,7 +70,17 @@
 
                   <select name="searchBy" class="form-control">
 
-                  <option value="username" <?php echo $searchBy=="username"?'selected="selected"':""; ?>>Username</option><option value="full_name" <?php echo $searchBy=="full_name"?'selected="selected"':""; ?>>Full_name</option><option value="birth_date" <?php echo $searchBy=="birth_date"?'selected="selected"':""; ?>>Birth_date</option><option value="gender.gender_desc" <?php echo $searchBy=="gender.gender_desc"?'selected="selected"':""; ?>>Gender</option><option value="company" <?php echo $searchBy=="company"?'selected="selected"':""; ?>>Company</option><option value="mobile" <?php echo $searchBy=="mobile"?'selected="selected"':""; ?>>Mobile</option><option value="phone" <?php echo $searchBy=="phone"?'selected="selected"':""; ?>>Phone</option><option value="photo" <?php echo $searchBy=="photo"?'selected="selected"':""; ?>>Photo</option><option value="countries.name" <?php echo $searchBy=="countries.name"?'selected="selected"':""; ?>>Country</option><option value="cities.name" <?php echo $searchBy=="cities.name"?'selected="selected"':""; ?>>City</option><option value="address" <?php echo $searchBy=="address"?'selected="selected"':""; ?>>Address</option>
+                  <option value="username" <?php echo $searchBy=="username"?'selected="selected"':""; ?>>اسم المستخدم</option>
+                  <option value="full_name" <?php echo $searchBy=="full_name"?'selected="selected"':""; ?>>الاسم كاملا</option>
+                  <option value="birth_date" <?php echo $searchBy=="birth_date"?'selected="selected"':""; ?>>تاريخ الميلاد</option>
+                  <option value="gender.gender_desc" <?php echo $searchBy=="gender.gender_desc"?'selected="selected"':""; ?>>النوع</option>
+                  <option value="company" <?php echo $searchBy=="company"?'selected="selected"':""; ?>>جهة العمل</option>
+                  <option value="mobile" <?php echo $searchBy=="mobile"?'selected="selected"':""; ?>>الموبايل</option>
+                  <option value="phone" <?php echo $searchBy=="phone"?'selected="selected"':""; ?>>التلفون</option>
+                  <option value="photo" <?php echo $searchBy=="photo"?'selected="selected"':""; ?>>صورة شخصية</option>
+                  <option value="countries.name" <?php echo $searchBy=="countries.name"?'selected="selected"':""; ?>>الدولة</option>
+                  <option value="cities.name" <?php echo $searchBy=="cities.name"?'selected="selected"':""; ?>>المدينة</option>
+                  <option value="address" <?php echo $searchBy=="address"?'selected="selected"':""; ?>>العنوان</option>
 
                   </select>
 
@@ -124,7 +134,7 @@
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="username"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["username"]; ?>" class="link_css"> Username <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["username"]; ?>" class="link_css"> اسم المستخدم <?php echo $symbol ?></a></th>
 
 						
 
@@ -132,13 +142,13 @@
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="full_name"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["full_name"]; ?>" class="link_css"> Full_name <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["full_name"]; ?>" class="link_css"> الاسم كاملا <?php echo $symbol ?></a></th>
 
 						
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="birth_date"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["birth_date"]; ?>" class="link_css"> Birth_date <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["birth_date"]; ?>" class="link_css"> تاريخ الميلاد <?php echo $symbol ?></a></th>
 
 						
 
@@ -148,31 +158,31 @@
 
 
 
-				<th> <a href="<?php echo $fields_links["gender.gender_desc"]; ?>" class="link_css"> Gender <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["gender.gender_desc"]; ?>" class="link_css"> النوع <?php echo $symbol ?></a></th>
 
    						
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="company"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["company"]; ?>" class="link_css"> Company <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["company"]; ?>" class="link_css"> جهة العمل <?php echo $symbol ?></a></th>
 
 						
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="mobile"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["mobile"]; ?>" class="link_css"> Mobile <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["mobile"]; ?>" class="link_css"> الموبايل <?php echo $symbol ?></a></th>
 
 						
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="phone"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["phone"]; ?>" class="link_css"> Phone <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["phone"]; ?>" class="link_css"> التلفون <?php echo $symbol ?></a></th>
 
 						
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="photo"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["photo"]; ?>" class="link_css"> Photo <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["photo"]; ?>" class="link_css"> صورة شخصية <?php echo $symbol ?></a></th>
 
 						
 
@@ -182,7 +192,7 @@
 
 
 
-				<th> <a href="<?php echo $fields_links["countries.name"]; ?>" class="link_css"> Country <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["countries.name"]; ?>" class="link_css"> الدولة <?php echo $symbol ?></a></th>
 
    						
 
@@ -192,13 +202,13 @@
 
 
 
-				<th> <a href="<?php echo $fields_links["cities.name"]; ?>" class="link_css"> City <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["cities.name"]; ?>" class="link_css"> المدينة <?php echo $symbol ?></a></th>
 
    						
 
 				<?php $symbol = isset($_GET["sortBy"]) && $_GET["sortBy"]=="address"?"<i class='fa fa-sort-$sortSym' aria-hidden='true'></i>": "<i class='fa fa-sort' aria-hidden='true'></i>"; ?>
 
-				<th> <a href="<?php echo $fields_links["address"]; ?>" class="link_css"> Address <?php echo $symbol ?></a></th>
+				<th> <a href="<?php echo $fields_links["address"]; ?>" class="link_css"> العنوان <?php echo $symbol ?></a></th>
 
 						
 
