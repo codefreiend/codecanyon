@@ -326,44 +326,35 @@
             <?php }  ?>
 
 
-               
-
-                
-
-               
-
 
 
 				<!-- BO : Training_courses -->
 
                 <li <?php if($contr == 'training_courses'){?>class="active "<?php } ?>  >
-
                     <a href="javascript:;"><i class="fa fa-graduation-cap"></i><span class="title">الدورات التدريبية</span>
-
-                        <?php if($contr == 'training_courses'){?><span class="selected"></span><?php } ?>
-
+                    <?php if($contr == 'training_courses'){?><span class="selected"></span><?php } ?>
                       <span class="arrow <?php if($contr == 'training_courses'){?>open<?php } ?>"></span>
-
                     </a>
 
                     <ul class="nav nav-second-level">
 
-                      <li <?php if($contrnew == 'training_courses/add'){?>class="active "<?php } ?>>
-
-                        <a href="<?php echo base_url()?>admin/training_courses/add"><i class="fa fa-angle-double-left">
-
+<!--                       <li <?php if($contrnew == 'training_courses/add'){?>class="active "<?php } ?>>
+                            <a href="<?php echo base_url()?>admin/training_courses/add"><i class="fa fa-angle-double-left">
                             </i>اضافة دورة تدريبية </a>
+                      </li> -->
 
-                      </li>
+                <li <?php if($contrnew == 'training_courses/coursesToApproved'){?>class="active "<?php } ?>>
+                    <a href="<?php echo base_url()?>admin/training_courses/coursesToApproved"><i class="fa fa-angle-double-left">
+                    </i>طلبات تنتظر الموافقة </a>
+                </li>
+
                        <?php if($ion_auth->in_group('Trainee')){?>
-                      <li <?php if($contrnew == 'training_courses/'){?>class="active"<?php } ?>>
-
+                        <li <?php if($contrnew == 'training_courses/'){?>class="active"<?php } ?>>
                         <a href="<?php echo base_url()?>admin/training_courses/my_courses"><i class="fa fa-gear"></i>دوراتي</a>
-
                       </li> 
                         <?php } else{?>
                       <li>
-                        <a href="<?php echo base_url()?>admin/training_courses/index"><i class="fa fa-gear"></i>جميع الدورات التدريبية</a>
+                        <a href="<?php echo base_url()?>admin/training_courses/index"><i class="fa fa-gear"></i> الدورات التدريبية بالمركز</a>
                         
                       </li>
                         <?php }?>
