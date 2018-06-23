@@ -12,7 +12,7 @@
 
          <li>
 
-            <a href="<?php echo base_url().'admin/'?>">الداش يورد</a>
+            <a href="<?php echo base_url().'index.php/welcome/login'?>">الداش يورد</a>
 
          </li>
 
@@ -242,17 +242,13 @@
            
 
             <?php if($ion_auth->in_group('admin') || $ion_auth->in_group('Instructor')){?>  
-           <a href="<?php echo base_url()?>admin/training_courses/edit/<?php echo $value->id; ?>" title="Edit">
+              <a href="<?php echo base_url()?>admin/training_courses/edit/<?php echo $value->id; ?>" title="Edit">
+                <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
+              </a>
 
-            <span class="btn btn-info " ><i class="fa fa-edit"></i></span>
-
-           </a>
-
-           <a  title="Delete" data-toggle="modal" data-target="#commonDelete" onclick="set_common_delete('<?php echo $value->id; ?>','training_courses');">
-
-           <span class="btn btn-info " ><i class="fa fa-trash-o "></i></span>
-
-           </a>
+            <a  title="Delete" data-toggle="modal" data-target="#commonDelete" onclick="set_common_delete('<?php echo $value->id; ?>','training_courses');">
+              <span class="btn btn-info " ><i class="fa fa-trash-o "></i></span>
+            </a>
            <?php } ?>
 
 
