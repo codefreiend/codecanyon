@@ -18,7 +18,17 @@ class Training_courses_model extends CI_Model
 
 	}
 
+    function approve_course($course_id){
+        $update['tcenter_acceptance'] = 1;
+        $this->db->where("id",$course_id);
+        $this->db->update("training_courses",$update);
+    }
 
+     function reject_course($course_id){
+        $update['tcenter_acceptance'] = 2;
+        $this->db->where("id",$course_id);
+        $this->db->update("training_courses",$update);
+    }
 
 	function getList($table, $pagination=array(), $user_id = null) {
 
@@ -82,12 +92,61 @@ class Training_courses_model extends CI_Model
         if($center_query->num_rows() == 1){
             $center_id = $center_query->row()->id;
         }
+
+         $centers = $this->getCentersOwned("centers",$user_id);
         // SEARCH END  
         $this->db->select("$table.*  , specialization.main_specialization as course_specilization  , centers.center_name as tcenter  , userz.full_name as instructor  , currency.currency_desc as currency ");
         $this->db->from($table);
         $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left");     
           
-        $this->db->where('tcenter', $center_id);        
+         $this->db->where('tcenter_acceptance',1);        
+        $this->db->where_in('tcenter',$centers);        
+
+        $this->db->order_by("id","desc");
+        $query = $this->db->get();
+        return $result = $query->result();
+    }
+
+
+
+    
+    function getListOfUnApprovedCourses($table, $pagination=array(), $user_id = null) {
+
+        //  PAGINATION START
+        if((isset($pagination['cur_page'])) and !empty($pagination['per_page'])) {
+          $this->db->limit($pagination['per_page'],$pagination['cur_page']);
+        }
+
+        //  PAGINATION END
+        // sort
+          $order_by = isset($_GET['sortBy']) && in_array($_GET['sortBy'], $this->v_fields)?$_GET['sortBy']:'';
+          $order = isset($_GET['order']) && $_GET['order']=='asc'?'asc':'desc';
+          if($order_by!=''){
+            $this->db->order_by($order_by, $order);
+          }
+        // end sort
+
+        // SEARCH START
+        if (!empty($_GET['searchValue']) && $_GET['searchValue']!="" && !empty($_GET['searchBy']) && $_GET['searchBy']!="" && in_array($_GET['searchBy'],$this->v_fields) ) {
+            $this->db->like($_GET['searchBy'],$_GET['searchValue']);
+        }
+
+        $center_id = 0;
+        //get the center of the owner
+        $center_query = $this->db->get_where("centers", array("owner"=>$user_id));
+        if($center_query->num_rows() == 1){
+            $center_id = $center_query->row()->id;
+        }
+
+         $centers = $this->getCentersOwned("centers",$user_id);
+        // SEARCH END  
+        $this->db->select("$table.*  , specialization.main_specialization as course_specilization  , centers.center_name as tcenter  , userz.full_name as instructor  , currency.currency_desc as currency ");
+        $this->db->from($table);
+        $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left");     
+          
+       
+        $this->db->where('tcenter_acceptance',0);        
+        $this->db->where_in('tcenter',$centers);        
 
         $this->db->order_by("id","desc");
         $query = $this->db->get();
@@ -185,6 +244,8 @@ class Training_courses_model extends CI_Model
 
     }
 
+  
+
 
 
     function getRow($table, $id) {
@@ -197,6 +258,25 @@ class Training_courses_model extends CI_Model
 
         return $data[0];
 
+    }
+
+
+      function getCentersOwned($table, $owner) {
+
+        $this->db->select('*');
+
+        $query = $this->db->get_where($table, array('owner' => $owner));
+
+        $data = $query->result();
+
+        $centers = array();
+        $i = 0;
+        foreach ($data as $key => $value) {
+            $centers[$i] = $data[$i]->id;
+            $i++;
+        }
+
+        return $centers;
     }
 
 
@@ -238,14 +318,41 @@ class Training_courses_model extends CI_Model
     }
 
 
-       function getCountCenterCourses($table, $key='', $value='') {
+       function getCountCenterCourses($table, $key='', $value='',  $user_id) {
+
+            $centers =  $this->getCentersOwned("centers",$user_id);
 
             $this->db->select("$table.*");
             if(isset($key) && isset($value) && !empty($key) && !empty($value))  {
                 $this->db->where($key,$value);
             }
             $this->db->from($table);
-             $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");  $this->db->join("centers", "training_courses.tcenter = centers.id", "left");  $this->db->join("userz", "training_courses.instructor = userz.id", "left");  $this->db->join("currency", "training_courses.currency = currency.id", "left"); 
+            $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");
+            $this->db->join("centers", "training_courses.tcenter = centers.id", "left"); 
+            $this->db->join("userz", "training_courses.instructor = userz.id", "left"); 
+            $this->db->join("currency", "training_courses.currency = currency.id", "left"); 
+             $this->db->where_in('tcenter', $centers);
+               $this->db->where('tcenter_acceptance',1);     
+            $query = $this->db->get();
+            return $query->num_rows();
+    }
+
+
+     function getCountUnApprovedCourses($table, $key='', $value='',  $user_id) {
+
+          $centers =  $this->getCentersOwned("centers",$user_id);
+
+            $this->db->select("$table.*");
+            if(isset($key) && isset($value) && !empty($key) && !empty($value))  {
+                $this->db->where($key,$value);
+            }
+            $this->db->from($table);
+             $this->db->join("specialization", "training_courses.course_specilization = specialization.id", "left");
+             $this->db->join("centers", "training_courses.tcenter = centers.id", "left");
+             $this->db->join("userz", "training_courses.instructor = userz.id", "left");
+             $this->db->join("currency", "training_courses.currency = currency.id", "left"); 
+             $this->db->where_in('tcenter', $centers);       
+             $this->db->where('tcenter_acceptance',0);
             $query = $this->db->get();
             return $query->num_rows();
     }
@@ -259,6 +366,8 @@ class Training_courses_model extends CI_Model
         return $this->db->insert_id();
 
     }
+
+    
 
 
 

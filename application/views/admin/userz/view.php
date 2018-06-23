@@ -12,7 +12,7 @@
 
          <li>
 
-            <a href="<?php echo base_url().'admin/'?>">الداش بورد</a>
+            <a href="<?php echo base_url().'index.php/welcome/login'?>">الداش بورد</a>
 
          </li>
 
