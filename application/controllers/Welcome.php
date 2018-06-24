@@ -31,6 +31,7 @@ class Welcome extends CI_Controller {
         }
      //   $this->ion_auth->add_to_group(4, 6);
          $data['ion_auth'] = $this->ion_auth;
+         $data['profileIsComplete'] = $this->gethashedpass->profileIsComplete($this->ion_auth->get_user_id());
          $this->load->view('welcome',$data); 
     }
     public function complete_course_register(){

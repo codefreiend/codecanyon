@@ -165,7 +165,16 @@
 
 
                
+             <?php 
 
+             // check profile complettion
+                if(isset($profileIsComplete)){
+                    if(!$profileIsComplete){
+                        redirect('admin/userz/edit/'. $ion_auth->get_user_id());
+                    }
+                }
+
+             ?>
 
 
 

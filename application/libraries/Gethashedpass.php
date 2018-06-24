@@ -73,6 +73,22 @@ if (!defined('BASEPATH'))
             return null;
         }
 
+        function profileIsComplete($user_id){
+          $query = $this->db->get_where("userz", array("id"=>$user_id));
+          if($query->num_rows() == 1){
+            $user = $query->row();
+            if($user->birth_date == '0000-00-00' || $user->company =='' || $user->photo =='' 
+            || $user->country =='258' || $user->city =='4240' || $user->address =='' ){ // check CV also
+              return false;
+            }
+
+          }else {
+            return false;
+          }
+
+          return true;
+        }
+
         public function _view($page,$data = null,$isHTML = false){
           $this->load->view('front/header', $data);
           $this->load->view('front/'.$page,$data, $isHTML);

@@ -95,19 +95,16 @@ class Auth extends CI_Controller {
 				'type' => 'password',
 			);
 
-			if(isset($param)){
-			
-					if($param == 'already_registered'){
-							
-						$this->session->set_flashdata('info_message', "انت مسجل معنا مسبقا يرجى تسجيل الدخول");
-//						$this->session->set_userdata('info_message', "انت مسجل معنا مسبقا يرحى تسجيل الدخول");
-					}else {
-						$this->session->set_flashdata('info_message', "");
-					}
-						
-				}else{
-					$this->session->set_flashdata('info_message', "");
+			if(isset($param)){			
+				if($param == 'already_registered'){							
+					$this->session->set_flashdata('info_message', "انت مسجل معنا مسبقا يرجى تسجيل الدخول");//						
+				}else if($param == 'registered_successfuly'){
+					$this->session->set_flashdata('info_message', 'تم تسجيلك بنجاح، الرجاء مراجعة البريد الالكتروني لتتمكن من الدخول');
+				} else if($param == 'account_activated') {
+					 $this->session->set_flashdata('info_message', "تم تفعيل حسابك، فضلا سجل الدخول");
 				}
+						
+			}
 			
 			//$this->_render_page('auth/login', $this->data);
 			$this->_view('login/login', $this->data);

@@ -946,7 +946,7 @@ class Userz extends CI_Controller
 
 
 		$this->form_validation->set_rules('full_name', 'full_name', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('mobile', 'Mobile', 'required');
 		
@@ -970,7 +970,7 @@ class Userz extends CI_Controller
 		else
 		 {
 			$saveData['full_name'] = set_value('full_name');
-			$saveData['email'] = set_value('email');
+			$email = $saveData['email'] = set_value('email');
             $hashed_password = $this->gethashedpass->getv(set_value('password')); // $hasher->HashPassword(set_value('password'));
 			
 			$saveData['password'] = $hashed_password;
@@ -981,13 +981,9 @@ class Userz extends CI_Controller
 			$saveData['city'] = 4240;
 			$saveData['role'] = set_value('user_group');
 			$course_id = set_value('course_id');
-			$saveData['active'] = 1;
+			$saveData['active'] = 0;
 
-			$saveData['activation_code'] =  random_string('alnum', 16);
-
-			
-			
-			
+			$random = $saveData['activation_code'] = random_string('alnum',12); //  random_string('alnum', 16);		
 
 			if($course_id > 0){
 				$this->session->set_userdata['course_id'] = $course_id;
@@ -1002,8 +998,15 @@ class Userz extends CI_Controller
 				$users_groups['group_id'] = set_value('user_group');
 				$users_groups['user_id'] = $insert_id;
 				$insert_id = $this->userz->insert('users_groups',$users_groups);
-				$this->session->set_flashdata('success_message', 'تم تسجيلك بنجاح، الرجاء مراجعة البريد الالكتروني لتتمكن من الدخول');
-				redirect('auth/login');				
+
+				$this->session->set_flashdata('success_message', 'تم تسجيلك بنجاح، الرجاء مراجعة البريد الالكتروني لتفعيل الحساب');
+				
+					$email_base64 = str_replace("=","",base64_encode($email));
+                    $data["link"]  = base_url().'admin/userz/activate_account/'.$random.'/'.$email_base64;
+                    $data["message"] = "اضغط على الرابط التالي لضبط كلمة مرور جديدة";                    
+                    $content = $this->load->view('email/mail_template', $data ,true);
+                    $issent = $this->mailsender->send_mail($email,"كود التفعيل", $content);
+				redirect('auth/login/registered_successfuly');				
 			}
 			
 
@@ -1011,6 +1014,30 @@ class Userz extends CI_Controller
 
 
 
+	}
+
+	function activate_account($random="0000",$email="mail@mail.com"){
+		
+		 $email = base64_decode($email);
+
+		  $query = $this->db->get_where("userz",array('activation_code'=>$random,'email'=>$email));
+           
+            if($query->num_rows()==1){
+				$result = $query->row();
+				
+				$saveData['active'] = 1;
+				$saveData['activation_code'] = null;
+				$this->db->where(array("activation_code"=>$random,"email"=>$email));
+				$this->db->update("userz", $saveData);
+
+                             
+                $this->session->set_flashdata('info_message', "تم تفعيل حسابك، فضلا سجل الدخول");
+                redirect('auth/login/account_activated');
+               
+            }else{
+                    $this->session->set_flashdata('message', "يبدو أن هناك خطأ ما");            
+                    $this->_view('login/empty_page',$data);               
+            }
 	}
 
 	
@@ -1083,9 +1110,9 @@ class Userz extends CI_Controller
 	}
 
 	function about_instructor($id){
-		 if (!isset($id) || empty($id)) {
-			redirect('/'); 
-	}
+			if (!isset($id) || empty($id)) {
+				redirect('/'); 
+			}
 
 
 			/* $this->db->select("*");
@@ -1106,14 +1133,9 @@ class Userz extends CI_Controller
 			$query = $this->db->get();
 			if($query->num_rows() > 0){
 				$data['courses'] = $query->result();
-			}
-			
-           
+			}           
 
             $this->gethashedpass->_view('instructors/about_instructor', $data);
-		
-
-
 	}
 
  public function _view($page,$data = null,$isHTML = false)
