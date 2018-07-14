@@ -75,7 +75,7 @@ a {
     transition: all 0.3s ease 0s;
     -moz-transition:all .3s;
     text-decoration:none;
-    color:#222;
+    color:#5cb85c;
     font-weight: 700;
     font-size: 14px;
 }
@@ -313,7 +313,7 @@ a#scrollUp:hover{
 	animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
 }
 .logo {
-    padding: 20px 0;
+    padding: 5px 0;
 }
 .mainmenu ul li{
     display: inline-block;
@@ -1484,7 +1484,7 @@ h3.about-corse{
 }
 
 .service-area3{
-	padding:30px 0px 90px;
+	padding:10px 0px 90px;
 }
 .service-area3 .service-wrap{
     border: 1px solid #ddd;

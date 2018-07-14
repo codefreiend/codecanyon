@@ -1,4 +1,8 @@
-
+<style>
+a, span{
+    font-size:10px;
+}
+</style>
 
         <!-- contact-area start -->
         <div class="contact-area bg-1 ptb-120 mb-510">
@@ -60,14 +64,16 @@
                                     </div>
 
                                      <div class="col-xs-8" style="margin-top: 15px;">
-                                     ليس لديك حساب؟     <a href="<?php echo base_url()?>index.php/admin/userz/register" class=""> سجل من هنا   </a>
+                                     <span>ليس لديك حساب؟ </span>    <a href="<?php echo base_url()?>index.php/admin/userz/register" class=""> سجل من هنا   </a>
+                                     <a href="<?php echo base_url()?>index.php/welcome/forgot_password" class="pull-right">   نسيت كلمة المرور   </a>
+                                     | 
                                     </div>
 
 
-                                    <div class="col-xs-12">
+                                   <!--  <div class="col-xs-12">
                                      <a href="<?php echo base_url()?>index.php/welcome/forgot_password" class="pull-right">   نسيت كلمة المرور   </a>
                                     
-                                    </div>
+                                    </div> -->
 
                                     
 
@@ -78,6 +84,7 @@
                     <div class="col-md-1">
                         <div class="contact-wrap">
                             <ul>
+                           
                                <!--  <li>
                                     <i class="fa fa-home"></i>
                                     Address:
@@ -101,6 +108,12 @@
                                 </li> -->
                             </ul>
                         </div>
+                    </div>
+
+                    <div class="col-md-5">                    
+                        <center>
+                            <img src="<?php echo base_url()?>assets/images/logo-login-trans.png" alt="">
+                        </center>                    
                     </div>
                 </div>
                 <div class="row">

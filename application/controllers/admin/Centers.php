@@ -296,11 +296,8 @@ class Centers extends CI_Controller
 			$saveData['center_name'] = set_value('center_name');
 			$saveData['specialization'] = set_value('specialization');
 			if(isset($photo_data["logo"]) && !empty($photo_data["logo"]))
-
 			{
-
-			$saveData["logo"] = $photo_data["logo"];
-
+				$saveData["logo"] = $photo_data["logo"];
 			}
 			$saveData['center_type'] = set_value('center_type');
 			$saveData['owner'] = set_value('owner');

@@ -263,21 +263,24 @@
       <?php 
 
       if(isset($userz) && !empty($userz)):
-
       foreach($userz as $key => $value): ?>
 
+<?php if($ion_auth->in_group('Instructor')){
+    if($ion_auth->get_user_id() == $value->id){
+     echo '<option value="'.$value->id.'">'.
+            $value->full_name .'
+          </option>';
+    }
+ } else{?>
+        
+
           <option value="<?php echo $value->id; ?>">
-
             <?php echo $value->full_name; ?>
-
           </option>
-
+         <?php }?>
       <?php endforeach; ?>
-
       <?php endif; ?>
-
       </select>
-
         </div>
 
     </div>
@@ -531,6 +534,35 @@
 
       <!-- Currency End -->
 
+
+
+    <!-- Logo Start -->
+
+    <div class="form-group">
+
+      <label for="address" class="col-sm-3 control-label"> شعار الدورة </label>
+
+      <div class="col-sm-6">
+
+      <input type="file" name="logo" />
+
+      <input type="hidden" name="old_logo" value="<?php if (isset($logo) && $logo!=""){echo $logo; } ?>" />
+
+        <?php if(isset($logo_err) && !empty($logo_err)) 
+
+        { foreach($logo_err as $key => $error)
+
+        { echo "<div class=\"error-msg\"></div>"; } }?>
+
+      </div>
+
+        <div class="col-sm-3" >
+
+      </div>
+
+    </div>
+
+    <!-- Logo End -->
 
 
 

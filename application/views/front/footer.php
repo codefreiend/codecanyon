@@ -74,6 +74,7 @@
         <!-- jquery latest version -->
         <script src="<?=base_url()?>assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="<?=base_url()?>assets/js/vendor/jquery-ui.min.js"></script>
+        <script src="<?=base_url()?>assets/js/jquery.star-rating-svg.js"></script>
         <!-- bootstrap js -->
         <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
         <!-- owl.carousel.2.0.0-beta.2.4 css -->
@@ -114,18 +115,106 @@
                                             
                                             });
 
+
+                                            $(".rate-trainer").starRating({
+                                                starSize: 20,
+                                                activeColor: '#5cb85c',
+                                                baseUrl: true,
+                                                callback: function(currentRating, $el){
+                                                    var baseUrl =location.href;                                                    
+                                                    var baseUrl = baseUrl.replace("about_instructor", "rate_instructor");
+                                                    console.log(baseUrl);
+                                                    var data = {};
+
+                                                    // throw some data into the object
+                                                        data.rating = currentRating;
+                                                
+                                                    // convert the object into a json string
+                                                    var data_json = JSON.stringify(data);
+                                                    // alert(data_json);
+                                                    $.ajax({
+                                                        type: 'post',
+                                                        //url: '<?php echo base_url()?>admin/userz/rate_instructor',
+                                                        url: baseUrl,
+                                                        data: data_json,
+                                                        success: function(result) {
+                                                            // check result object for what you returned
+                                                        console.log(result);
+                                                        $("#instructors_review_id").val(result);
+                                                        
+                                                        },
+                                                        error: function(error) {
+                                                            // check error object or return error
+                                                        }
+                                                    });
+
+                                                    // make a server call here
+                                                }
+                                            });
+
+                                              $(".trainer1-rating").starRating({
+                                                starSize: 30,
+                                                useFullStars: true,
+                                                callback: function(currentRating, $el){
+                                                    // make a server call here
+                                                }
+                                            });
+
+                                            <?php if(isset($calculated_rating)):?>
+                                                $(".trainer-rating").starRating({
+                                                        totalStars: 5,
+                                                        emptyColor: 'lightgray',
+                                                        hoverColor: 'salmon',
+                                                        activeColor: '#5cb85c',
+                                                        initialRating: <?php echo $calculated_rating?>, // 2.5,
+                                                        strokeWidth: 0,
+                                                        readOnly: true,
+                                                        useGradient: false,
+                                                        callback: function(currentRating, $el){
+                                                            alert('rated ' + currentRating);
+                                                            console.log('DOM element ', $el);
+                                                        }
+                                                        });
+                                                    <?php endif;?>
+
+                                                $(function(){
+                                                   $(".add-rating").on("click", function(){
+                                                      //  $(this).toggleClass("expander expanded");
+                                                         $('.review_trainer').toggle();
+                                                        
+                                                      //  .parent().next().slideToggle();
+                                                    });
+                                                });
+
                                         });
 
                                         $(document).on('click', '.rstar', function () {
                                             rating_val = $(this).attr("rval");
                                             $("#selected-stars").text(rating_val + " نجوم");
                                             $("#hidden-stars").text(rating_val);
-                                        
-                                            
-                                        
-                                        alert(rating_val);
+                                            alert(rating_val);
+                                        });
 
-
+                                          $(document).on('click', '#send_instructor_content', function () {
+                                              var data = {};
+                                              data.instructors_review_id = $("#instructors_review_id").val();
+                                              data.content = $("#content").val();
+                                              var data_json = JSON.stringify(data);
+                                           $.ajax({
+                                                type: 'post',
+                                                url: '<?php echo base_url()?>admin/userz/update_rate_instructor',
+                                               
+                                                data: data_json,
+                                                success: function(result) {
+                                                    // check result object for what you returned
+                                                console.log(result);
+                                                $("#instructors_review_id").val(result);
+                                                
+                                                },
+                                                error: function(error) {
+                                                    // check error object or return error
+                                                }
+                                            });
                                         });
 
                                        

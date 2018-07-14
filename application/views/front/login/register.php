@@ -1,3 +1,14 @@
+ <style>
+a, span{
+    font-size:10px;
+}
+
+.contact-form input[type="radio"]{
+    width: auto !important;
+}
+
+</style>
+
  <div class="contact-area bg-1 ptb-120 mb-510">
             <div class="container">
                 <div class="row">
@@ -28,7 +39,7 @@
                             <div class="cf-msg"></div>
                             <form action="" method="post" id="cf">
 
-          <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
 
           
                                 <div class="row">
@@ -94,7 +105,7 @@
                                     </div>
 
                                      <div class="col-xs-8" style="margin-top: 15px;">
-                                     أنت عضو مسجل؟  <a href="<?php echo base_url()?>index.php/auth/login" class=""> سجل الدخول  </a>
+                                   <span>  أنت عضو مسجل؟ </span> <a href="<?php echo base_url()?>index.php/auth/login" class=""> سجل الدخول  </a>
                                     </div>
                                 </div>
                             </form>
@@ -126,6 +137,12 @@
                                 </li> -->
                             </ul>
                         </div>
+                    </div>
+
+                     <div class="col-md-5">                    
+                        <center>
+                            <img src="<?php echo base_url()?>assets/images/logo-login-trans.png" alt="">
+                        </center>                    
                     </div>
                 </div>
                 <div class="row">

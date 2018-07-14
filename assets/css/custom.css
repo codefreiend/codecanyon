@@ -119,3 +119,9 @@ marquee{
    
     font-size: 12px;
 }
+
+
+
+.review_trainer{
+       display:none;
+    }

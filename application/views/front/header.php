@@ -36,6 +36,7 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/newsbar.css">
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/jquery-ui.min.css">
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/jquery-ui.theme.min.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/star-rating-svg.css">
         
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/custom.css">
 		<!-- responsive css -->
@@ -120,17 +121,17 @@ if(isset($courses_data))
                         <div class="col-md-9 col-sm-9 hidden-xs">
                             <div class="mainmenu text-right">
                                 <ul id="navigation">
-                                    <li><a href="<?=base_url();?>">الرئيسية</i></a>
+                                    <li <?=isset($active) && $active=="home" ? "class=\"active\"":""?>><a href="<?=base_url();?>">الرئيسية</i></a>
                                        
                                     </li>
-                                    <li class="active"><a href="<?=base_url()?>welcome/courses_cards">الدورات التدريبية</i></a>
+                                    <li <?=isset($active) && $active=="courses_cards" ? "class=\"active\"":""?>><a href="<?=base_url()?>welcome/courses_cards">الدورات التدريبية</i></a>
                                        <!--  <ul>
                                             <li><a href="<?=base_url()?>welcome/courses_cards">الدورات التدريبية</a></li>
                                             <li><a href="<?=base_url()?>welcome/courses_list"> ورش العمل</a></li>
                                             <li class="active"><a href="service3.html"> السمنارات</a></li>
                                         </ul> -->
                                     </li>
-                                    <li><a href="<?=base_url()?>admin/userz/instructors">المدربين</i></a>
+                                    <li <?=isset($active) && $active=="instructors" ? "class=\"active\"":""?>><a href="<?=base_url()?>admin/userz/instructors">المدربين</i></a>
                                       <!--   <ul>
                                             <li><a href="<?=base_url()?>admin/userz/instructors">المدربين المتميزين</a></li>
                                             <li><a href="project2.html">Project Two</a></li>
@@ -138,7 +139,7 @@ if(isset($courses_data))
                                             <li><a href="project3.html">Project Fout</a></li>
                                         </ul> -->
                                     </li>
-                                    <li><a href="<?=base_url()?>welcome/centers_list">المراكز التدريبية</i></a>
+                                    <li <?=isset($active) && $active=="training_centers" ? "class=\"active\"":""?>><a href="<?=base_url()?>welcome/centers_list">المراكز التدريبية</i></a>
                                         <!-- <ul>
                                             <li><a href="<?=base_url()?>welcome/centers_list">المعاهد التدريبية</a></li>
                                             <li><a href="news2.html">news 2 Column</a></li>
@@ -147,8 +148,8 @@ if(isset($courses_data))
                                             <li><a href="news-details.html">news Detsils</a></li>
                                         </ul> -->
                                     </li>
-                                    <li><a href="<?=base_url()?>welcome/services">الخدمات</a></li>
-                                    <li><a href="javascript:void(0);">من نحن <i class="fa fa-angle-down"></i></a>
+                                    <li <?=isset($active) && $active=="services" ? "class=\"active\"":""?>><a href="<?=base_url()?>welcome/services_cards">الخدمات</a></li>
+                                    <li <?=isset($active) && $active=="aboutus" ? "class=\"active\"":""?>><a href="javascript:void(0);">من نحن <i class="fa fa-angle-down"></i></a>
                                         <ul class="right">
                                             <li><a href="about.html"> الرؤية والرسالة</a></li>
                                             <li><a href="about2.html"> عن دوارت بوك</a></li>

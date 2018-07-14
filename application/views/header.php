@@ -170,6 +170,7 @@
              // check profile complettion
                 if(isset($profileIsComplete)){
                     if(!$profileIsComplete){
+                        
                         redirect('admin/userz/edit/'. $ion_auth->get_user_id());
                     }
                 }
@@ -361,13 +362,15 @@
                         <li <?php if($contrnew == 'training_courses/'){?>class="active"<?php } ?>>
                         <a href="<?php echo base_url()?>admin/training_courses/my_courses"><i class="fa fa-gear"></i>دوراتي</a>
                       </li> 
-                        <?php } else{?>
-                      <li>
-                        <a href="<?php echo base_url()?>admin/training_courses/centerCourses"><i class="fa fa-gear"></i> الدورات التدريبية بالمركز</a>
-                        
-                      </li>
-                        <?php }?>
-
+                        <?php } else if($ion_auth->in_group('Instructor')){?>
+                            <li>
+                                <a href="<?php echo base_url()?>admin/training_courses/my_announced_courses"><i class="fa fa-gear"></i> دوراتي المعلنة  </a>
+                                
+                            </li>
+                        <?php } else if($ion_auth->in_group('center')){?>
+                                <a href="<?php echo base_url()?>admin/training_courses/centerCourses"><i class="fa fa-gear"></i> الدورات التدريبية بالمركز</a>
+                            
+                        <?php } ?>
                     </ul>
 
                 </li>

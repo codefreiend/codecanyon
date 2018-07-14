@@ -1055,10 +1055,14 @@ class Userz extends CI_Controller
 
 	
 	function test(){
-		$data["link"] = base_url().'admin/userz/validate_code/mohameddawaina@gmail.com/'.random_string('alnum', 16);
-		$data["message"] = "اضغط على الرابط التالي لتنشيط حسابك";
-		$content = $this->load->view('email/mail_template', $data ,true);
-		$hashed_password = $this->mailsender->send_mail("mohameddawaina@gmail.com","Test2", $content);
+		// $data["link"] = base_url().'admin/userz/validate_code/mohameddawaina@gmail.com/'.random_string('alnum', 16);
+		// $data["message"] = "اضغط على الرابط التالي لتنشيط حسابك";
+		// $content = $this->load->view('email/mail_template', $data ,true);
+		// $hashed_password = $this->mailsender->send_mail("mohameddawaina@gmail.com","Test2", $content);
+
+	  $var = $this->gethashedpass->hasCoursesWithThisInstructor($this->ion_auth->get_user_id(),12);
+	  echo $var;
+	  return;
 	}
 
 	function validate_code($email, $activation_code){
@@ -1099,8 +1103,8 @@ class Userz extends CI_Controller
 			$data['instructors'] = $query->result();
 			$data['serviceslib'] = $this->gethashedpass;		
 			$data['instructors_cards'] =  $this->load->view('front/instructors/instructor_card',$data, true);			
-			
-			
+			$data['ion_auth'] = $this->ion_auth;
+			$data['active'] = 'instructors';
             $this->gethashedpass->_view('instructors/instructors_cards', $data);
 		}else{
 			echo "No Data Found";
@@ -1114,6 +1118,11 @@ class Userz extends CI_Controller
 				redirect('/'); 
 			}
 
+			$data['ion_auth'] = $this->ion_auth;
+			$data['hasCoursesWithThisInstructor'] = $this->gethashedpass->hasCoursesWithThisInstructor($this->ion_auth->get_user_id(),$id);
+			$data['profileIsComplete'] = $this->gethashedpass->profileIsComplete($this->ion_auth->get_user_id());
+			$data['calculated_rating'] = $this->gethashedpass->calculated_rating($id);
+			
 
 			/* $this->db->select("*");
 			$this->db->from("userz");
@@ -1137,6 +1146,48 @@ class Userz extends CI_Controller
 
             $this->gethashedpass->_view('instructors/about_instructor', $data);
 	}
+	function rate_instructor($instructor_id){
+		$json_post = file_get_contents('php://input');
+		$decoded_data = json_decode($json_post);
+		
+		$save['user_id'] = $this->ion_auth->get_user_id();
+		$save['instructor_id'] = $instructor_id;
+		$save['rating'] = $decoded_data->rating;
+		$save['content'] ="";
+		$now = new DateTime("now", new DateTimeZone('Asia/Riyadh') );        
+		$save['created'] = $now->format('Y-m-d H:i:s');
+		$this->db->insert("instructors_review", $save);
+		$insert_id = $this->db->insert_id();
+		echo $insert_id;
+		return $insert_id;
+	}
+
+	function update_rate_instructor(){
+		$json_post = file_get_contents('php://input');
+		$decoded_data = json_decode($json_post);
+		
+		$instructors_review_id = $decoded_data->instructors_review_id; // $this->input->post("instructors_review_id");
+
+		if (!isset($instructors_review_id) || empty($instructors_review_id)) {
+			return "done";
+		}
+
+		$content = $decoded_data->content; // $this->input->post("conent");
+
+
+		if (!isset($content) || empty($content)) {
+			return "done";
+		}else {
+			$update['content'] = $content;
+			//$id = (int)$instructors_review_id;
+			$this->db->where("id",$instructors_review_id);
+			$this->db->update("instructors_review",$update);
+		}
+		return "done";
+	}
+	
+
+	
 
  public function _view($page,$data = null,$isHTML = false)
     {

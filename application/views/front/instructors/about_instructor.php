@@ -10,13 +10,13 @@
                         </h2>
                     </div>
                     <div class="col-md-3 col-sm-5">
-                     <div style="width:200px;">
+                       <!--  <div style="width:200px;">
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star"></span>
-                        </div>
+                        </div> -->
                     </div>    
                 </div>
 
@@ -27,7 +27,25 @@
 
                     <div class="col-md-3 col-sm-5 hidden-xs">
                             <img src="<?=base_url()?>uploads/photo/<?php echo $instructor->photo?>" alt="">
-                        
+                           <div class="col-md-12 col-sm-12">
+                           <div class="trainer-rating"></div> 
+                            <br>
+
+                             
+
+                           </div>
+                           <div class="col-md-12 col-sm-12">
+                        <?php if($ion_auth->logged_in()):?>
+                            <?php if($hasCoursesWithThisInstructor):?>                              
+                                <span><button class="btn btn-primary btn-sm add-rating">أضف تقييمك</button> </span>
+                                <div class="rate-trainer review_trainer" style="margin: 5px 0 0 0;"></div>                                    
+                                <textarea name="content" id="content" class="review_trainer form-control" cols="17" rows="3" style="margin: 0x 0 5px 0;"></textarea>
+                                <input type="hidden" id="instructors_review_id" name="instructors_review_id">
+                                <button class="btn btn-success btn-sm review_trainer" id="send_instructor_content">أرسل</button>
+                            <?php endif;?>
+                        <?php endif;?>
+                           </div>
+
                       <!--   <div class="about-img" style="background-image: url(&quot;assets/images/about/4.jpg&quot;); background-size: cover; background-position: center center; height: 339px;">
                         </div> -->
                     </div>

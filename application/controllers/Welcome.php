@@ -45,6 +45,8 @@ class Welcome extends CI_Controller {
     }
     public function index() {        
         $data['ion_auth'] = $this->ion_auth;
+        $data['serviceslib'] = $this->gethashedpass;
+        
         $data['search_centers'] = $this->search_centers();        
         $data['center_blocks'] = $this->show_center_blocks(); 
         $data['center_carousel_items'] = $this->show_centers_carousel();       
@@ -52,9 +54,11 @@ class Welcome extends CI_Controller {
         $data['instructor_cards'] = $this->instructor_cards();
         $data['search_instructor'] = $this->search_instructor();   
         $data['courses_data'] = $this->courses();
+        $data['course_logos'] = $this->list_course_logos();
         $data['search_courses'] = $this->search_courses();
         $data['courses_cards'] = $this->show_course_blocks();
         $data['statistical_bar'] = $this->statistical_bar();
+        $data['active'] = 'home';
         $this->_view('home', $data);
         return;
     }
@@ -310,10 +314,50 @@ class Welcome extends CI_Controller {
         $data['instructors_data'] = $this->instructors();
         $data['courses_data'] = $this->courses();
         $data['statistical_bar'] = $this->statistical_bar();
-       $data['center_carousel_items'] = $this->show_centers_carousel(); 
+        $data['center_carousel_items'] = $this->show_centers_carousel(); 
+        $data['active'] = 'training_centers';
         $this->_view('centers/centers_list', $data);
         return;
 
+    }
+
+    function services_cards(){
+       $data = array();
+        $data['active'] = 'services';
+       $query = $this->db->get_where("services");
+       if($query->num_rows()){
+           $data['services'] = $query->result();
+           $data['services_cards'] =  $this->load->view('front/services/service_card',$data, true);	
+           $this->_view('services/services_cards', $data);
+       }
+
+       
+        
+    }
+
+    function list_course_logos(){        
+        $logos = null;
+        $subscribed_query = $this->db->query("select logo from training_courses where instructor in 
+        (select user_id from service_subscriptions where service_id = 3) and LENGTH(logo) > 1");
+
+         if($subscribed_query->num_rows() > 0){
+
+           $logos = $subscribed_query->result();
+        }
+
+        return $logos;
+
+    }
+
+    function about_service($id){
+        $data['active'] = "services";
+        $query = $this->db->get_where("services",array("id"=>$id));
+        if($query->num_rows() == 1){
+            $data['service_details'] = $query->row();
+             $this->_view('services/service_details', $data);
+        }else{
+            echo "Error";
+        }
     }
 
     function search_centers(){
@@ -437,6 +481,7 @@ class Welcome extends CI_Controller {
                 $course_name = $string = word_limiter($course->course_name,3);
                 $course_date = $course->start_date;
                 $instructor = $course->instructor;
+                $course_is_valid = 
                 //$about_course = $string = word_limiter($course->about_course,7);
                 $course_blocks = $course_blocks . $this->show_course_block($course->id,$course_name,$about_course,$instructor,$course_date);
             }
@@ -454,6 +499,7 @@ class Welcome extends CI_Controller {
 		$data['course_date'] = $date;
         $data['instructor'] = $instructor;
         $data["userz"]=$this->training_courses->getListTable("userz");
+        $data['serviceslib'] = $this->gethashedpass;
 		//$data['logo'] = $logo;
 		return $this->load->view('front/courses/_course_block',$data, true);
 	}
@@ -480,11 +526,15 @@ class Welcome extends CI_Controller {
         $data['statistical_bar'] = $this->statistical_bar();
         $data['center_carousel_items'] = $this->show_centers_carousel(); 
         $data["instructors"] = $this->Userz->getAllInstructors();
+        $data['search_courses'] = $this->search_courses();
+        $data['serviceslib'] = $this->gethashedpass;
+        $data['active'] = 'courses_cards';
         $this->_view('courses/courses_cards', $data);
         return;
     }
 
     function course_details($id){
+         $data['serviceslib'] = $this->gethashedpass;
         $data["courses"] = $this->training_courses->course_details($id);
          if($data["courses"] == null){
             $data["message"] = "عفوا هذه الصفحة غير موجودة";
@@ -492,7 +542,7 @@ class Welcome extends CI_Controller {
         } 
          else
           {
-             $this->load->library('Gethashedpass');
+            
              $data['serviceslib'] = $this->gethashedpass;
              if($this->ion_auth->logged_in()) {
                 $data["ion_auth"] = $this->ion_auth;

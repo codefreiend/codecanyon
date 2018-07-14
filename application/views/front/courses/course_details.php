@@ -22,7 +22,9 @@
                              </ul>
                             <!--   <button class="btn btn-block btn-primary">التسجيل</button> -->
                             
-                                <?php if($ion_auth->in_group('Trainee')) {  ?>                                
+                                <?php
+                                 if($serviceslib->courseIsValidDate($courses->id)){
+                                if($ion_auth   ->in_group('Trainee')  ) {  ?>                                
                                     <?php if(!$serviceslib->isAlreadyRegistered($ion_auth->get_user_id(),$courses->id)) { ?>
                                     <a href="<?php echo base_url()?>welcome/register/<?php echo $courses->id?>" class="btn btn-block btn-primary">التسجيل</a>
                                 <?php }
@@ -32,7 +34,8 @@
                             else
                                 {?>
                                     <a href="<?php echo base_url()?>welcome/register/<?=$courses->id?>" class="btn btn-block btn-primary">التسجيل</a>
-                            <?php }?>                                
+                            <?php }
+                            }?>                                
                         </div>
                         
                     

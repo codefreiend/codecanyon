@@ -93,5 +93,64 @@ if (!defined('BASEPATH'))
           $this->load->view('front/header', $data);
           $this->load->view('front/'.$page,$data, $isHTML);
           $this->load->view('front/footer');		
-	    }
+      }
+      function getCoursesPresented($instructor) {
+
+        $this->db->select('*');
+
+        $query = $this->db->get_where("training_courses", array('instructor' => $instructor));
+
+        $data = $query->result();
+
+        $courses = array();
+        $i = 0;
+        foreach ($data as $key => $value) {
+            $courses[$i] = $data[$i]->id;
+            $i++;
+        }
+
+        return $courses;
+    }
+      public function hasCoursesWithThisInstructor($student_id=0, $instructor=0){
+          $courses = $this->getCoursesPresented($instructor);
+          $this->db->select("*");
+          $this->db->from("student_courses");
+          $this->db->where_in('course_id',$courses);
+          $this->db->where('student_id',$student_id);
+          $query = $this->db->get();
+          if($query->num_rows() > 0){
+            return true;
+          }
+
+          return false;
+      }
+
+      function calculated_rating($instructor_id = 0){
+          $rating = 0;
+          $query = $this->db->query('select count(rating) as count_of_rating, IFNULL(sum(rating), 0) as sum_of_rating from instructors_review where instructor_id ='.$instructor_id);
+          if($query->num_rows() > 0){
+            $result = $query->row();
+            $count_of_rating = $result->count_of_rating;
+            $sum_of_rating = $result->sum_of_rating;
+            if($count_of_rating == 0){
+                 $count_of_rating = 1;             
+            }
+             $rating = $sum_of_rating / $count_of_rating;
+          }
+          return $rating;
+      }
+      
+      function courseIsValidDate($course_id){
+        $this->db->select("*");
+        $this->db->from("training_courses");
+        $this->db->where('id',$course_id);
+        $this->db->where('end_date >=', date('Y-m-d'));     
+        $query = $this->db->get();       
+        if($query->num_rows() > 0){
+         return true;
+
+        }
+
+        return false;
+      }
     }

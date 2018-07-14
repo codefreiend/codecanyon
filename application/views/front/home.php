@@ -55,14 +55,39 @@
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                                    <li data-target="#myCarousel" data-slide-to="3"></li>
+
+                                     <?php if(isset($course_logos)){
+
+
+                                         $i = 0;
+                                        for($i=0;$i<count($course_logos);$i++){
+                                         ?>
+                                            <li data-target="#myCarousel" data-slide-to="$i" class="<?php if($i==0) echo"active";?>"></li>
+                                        <?php }
+
+                                        } else {?>
+
+
+                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                                            <li data-target="#myCarousel" data-slide-to="4"></li>
+                                        <?php }?>
                                 </ol>
 
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
+
+                                    <?php if(isset($course_logos)){$i = 0;?>
+                                        
+                                        <?php foreach($course_logos as $course_logo){?>
+
+                                             <div class="item <?php if($i==0) echo"active";?>">
+                                                <img src="<?php echo base_url()?>uploads/photo/<?php echo $course_logo->logo;?>" alt="Chicago">
+                                            </div>
+                                        <?php $i++; }?>
+                                    <?php } else {?>
                                     <div class="item active">
                                     <img src="<?php echo base_url()?>assets/images/slider/img1.jpg" alt="Los Angeles">
                                     </div>
@@ -78,6 +103,7 @@
                                     <div class="item">
                                     <img src="<?php echo base_url()?>assets/images/slider/img4.jpg" alt="New York">
                                     </div>
+                                    <?php }?>
                                 </div>
 
                                 <!-- Left and right controls -->
@@ -102,11 +128,11 @@
             <div class="row margin-class">                
                
                 <div class="clearfix"></div>
-                 <div class="col-md-9 col-sm-6 col-xs-12 col-2 block_optimizer1 content-tc box-1">                 
+                 <div class="col-md-8 col-sm-6 col-xs-12 col-2 block_optimizer1 content-tc box-1">                 
                  <?=$center_blocks?>
              </div>
 
-              <div class="col-md-3 col-sm-6 col-xs-12 col-2 block_optimizer1">
+              <div class="col-md-4 col-sm-6 col-xs-12 col-2 block_optimizer1">
                <div style="background-color:yellow;width:100%">
                   <!-- carousel start -->
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -157,11 +183,11 @@
             <div class="row margin-class">                
                
                 <div class="clearfix"></div>
-                 <div class="col-md-9 col-sm-6 col-xs-12 col-2 block_optimizer1 content-tc box-1">                 
+                 <div class="col-md-8 col-sm-6 col-xs-12 col-2 block_optimizer1 content-tc box-1">                 
                  <?=$instructor_cards?>
              </div>
 
-              <div class="col-md-3 col-sm-6 col-xs-12 col-2 block_optimizer1">
+              <div class="col-md-4 col-sm-6 col-xs-12 col-2 block_optimizer1">
                <div style="background-color:yellow;width:100%">
                   <!-- carousel start -->
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">

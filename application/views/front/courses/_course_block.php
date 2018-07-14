@@ -20,7 +20,10 @@
                </p>
                 <p><?php echo $course_date;?></p>
                 <p>أمن المعلومات</p>
-                <button class="btn btn-success" style="position:absolute;bottom:10px;" >سجل الان</button>
+
+                <?php if($serviceslib->courseIsValidDate($id)):?>
+                    <button class="btn btn-success" style="position:absolute;bottom:10px;" >سجل الان</button>
+                <?php endif;?>
             </div>
         </div>
     </a>

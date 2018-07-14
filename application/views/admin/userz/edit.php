@@ -80,11 +80,24 @@
 
               <?php if($this->session->flashdata('message')): ?>
 
-              <div class="alert alert-success">
+              <div class="alert alert-danger">
 
                 <button type="button" class="close" data-close="alert"></button>
 
                 <?php echo $this->session->flashdata('message'); ?>
+
+              </div>
+
+              <?php endif; ?> 
+
+
+                <?php if($this->session->flashdata('inf_message')): ?>
+
+              <div class="alert alert-success">
+
+                <button type="button" class="close" data-close="alert"></button>
+
+                <?php echo $this->session->flashdata('inf_message'); ?>
 
               </div>
 

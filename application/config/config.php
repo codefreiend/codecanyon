@@ -43,7 +43,7 @@ $config['accet_url'] = $config['base_url'].'accets/';
 $config['left_url'] = $config['base_url'];
 // $config['base_path'] = realpath(dirname(__FILE__) . '/../..').'/';
 //$config['base_path'] = 'C:/xampp/htdocs/codecanyon/';
-$config['base_path'] = 'D:/xampp/htdocs/codecanyon/';
+$config['base_path'] = 'D:/xampp/htdocs/dawratbook/';
 
 $config['pdf_path'] = $config['base_path'];
 $config['photo_url'] = $config['base_url'] . "uploads/photo/";
